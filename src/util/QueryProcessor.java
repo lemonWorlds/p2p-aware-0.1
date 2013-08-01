@@ -3,6 +3,7 @@ package util;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -13,6 +14,7 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class QueryProcessor {
 	public final static String FILE_NAME = "H:\\newWorkspace\\p2p-aware-0.1\\src\\config\\queries.properties";
@@ -35,7 +37,7 @@ public class QueryProcessor {
 			throw new RuntimeException("Static query strings could not be initialised due to faulty file connection.");
 		}
 		eventTypeQuery = createQueryFromString(props.getProperty("eventTypeQuery"));
-		ruleEventQuery = createQueryFromString(props.getProperty("eventQuery"));
+		ruleEventQuery = createQueryFromString(props.getProperty("ruleEventQuery"));
 		actionQuery = createQueryFromString(props.getProperty("actionQuery"));
 		eventSuperClassQueryPt1 = props.getProperty("eventSuperClassQueryPt1");
 		eventSuperClassQueryPt2 = props.getProperty("eventSuperClassQueryPt2");
@@ -61,11 +63,25 @@ public class QueryProcessor {
 	}
 	
 	public static List<String> runSuperClassQuery(String eventType, Model schema) {
-		Query eventTypeQuery = createQueryFromString(eventSuperClassQueryPt1 + eventType + eventSuperClassQueryPt2);
-		ResultSet results = processSelectQuery(executeQuery(eventTypeQuery,schema));
+		Query eventSuperClassQuery = createQueryFromString(eventSuperClassQueryPt1 + eventType + " " + eventSuperClassQueryPt2); //FIX THIS!
+		//TESTING 
+		System.out.println(eventSuperClassQueryPt1 + eventType + " " + eventSuperClassQueryPt2);
+		
+		ResultSet results = processSelectQuery(executeQuery(eventSuperClassQuery,schema));
 		List<String> resultsList = new ArrayList<String>();
 		while (results.hasNext()) {
-			resultsList.add(results.next().getResource(eventSuperClassQueryVar).getURI());
+			System.out.println("in loop");
+			QuerySolution result = results.next();
+			Iterator<String> iter = result.varNames();
+			while (iter.hasNext()) {
+				System.out.println(iter.next() + "!");
+			}
+			System.out.println(result);
+			System.out.println(eventSuperClassQueryVar);
+			Resource res = result.getResource(eventSuperClassQueryVar);
+			System.out.println(res);
+			resultsList.add(res.getURI());
+			//resultsList.add(results.next().getResource(eventSuperClassQueryVar).getURI());
 		}
 		return resultsList;
 	}

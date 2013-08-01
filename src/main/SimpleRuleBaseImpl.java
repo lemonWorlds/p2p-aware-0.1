@@ -16,7 +16,6 @@ public class SimpleRuleBaseImpl implements RuleBase {
 	@Override
 	public void addRules(Model... rules) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
