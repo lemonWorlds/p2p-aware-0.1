@@ -7,10 +7,9 @@ import com.hp.hpl.jena.rdf.model.Model;
 import interfaces.RuleBase;
 
 public class SimpleRuleBaseImpl implements RuleBase {
-	private Model schema = null;
 	
 	public SimpleRuleBaseImpl(Model schema) {
-		this.schema = schema;
+
 	}
 
 	@Override
