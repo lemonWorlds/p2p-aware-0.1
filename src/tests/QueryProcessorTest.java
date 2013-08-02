@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import main.SchemaFactory;
 
@@ -29,7 +30,9 @@ public class QueryProcessorTest {
 	private static Model documentEv;
 	private static Model evEv;
 	private static Model schemaMod = SchemaFactory.createSchema("C:\\Users\\Mum\\git\\protoNetwork\\src\\stuff\\schema.rdf");
-	
+	private static Model badEvent1;
+	private static Model badRule1;
+
 	@BeforeClass
 	public static void setUpModels() {
 		rule1 = ModelFactory.createDefaultModel();
@@ -99,6 +102,15 @@ public class QueryProcessorTest {
 		event5.addProperty(RDF.type,eventClass);
 		Resource peer5 = evEv.createResource("http://www.test.org/peer5");
 		event5.addProperty(occurredAt, peer5);
+		
+		badRule1 = ModelFactory.createDefaultModel();
+		Resource examplePeer = badRule1.createResource("www.badInput.com/peer1");
+		examplePeer.addProperty(RDF.type, schemaMod.getResource("http://www.model.org/peer"));
+		
+		badEvent1 = ModelFactory.createDefaultModel();
+		Resource exampleEvent = badEvent1.createResource("www.badInput.com/exEvent");
+		exampleEvent.addProperty(schemaMod.getProperty("http://www.model.org/occurredAt"), badEvent1.createResource("www.someResource.com"));
+
 	}
 
 	@Test
@@ -146,5 +158,21 @@ public class QueryProcessorTest {
 		assertEquals(QueryProcessor.runActionQuery(rule4),"http://www.rules.org/action4");
 		assertEquals(QueryProcessor.runActionQuery(rule5),"http://www.rules.org/action5");
 	}
-
+	
+	@Test(expected = NoSuchElementException.class)
+	public void testBadRuleInput() {
+		QueryProcessor.runRuleEventQuery(badRule1);
+	}
+	
+	@Test(expected = NoSuchElementException.class)
+	public void testBadRuleInput1() {
+		QueryProcessor.runActionQuery(badRule1);
+	}
+	
+	
+	@Test(expected = NoSuchElementException.class)
+	public void testBadEventInput() {
+		QueryProcessor.runEventTypeQuery(badEvent1);
+	}
+	
 }

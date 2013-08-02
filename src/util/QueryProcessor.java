@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 
 import com.hp.hpl.jena.query.Query;
@@ -46,17 +47,17 @@ public class QueryProcessor {
 		eventSuperClassQueryVar = malformedSuperClassVar.trim();
 	}
 	
-	public static String runEventTypeQuery(Model event) {
+	public static String runEventTypeQuery(Model event) throws NoSuchElementException {
 		ResultSet results = processSelectQuery(executeQuery(eventTypeQuery,event));
 		return extractResultVariable(results.next(),eventTypeQueryVar);
 	}
 	
-	public static String runRuleEventQuery(Model rule) {
+	public static String runRuleEventQuery(Model rule) throws NoSuchElementException {
 		ResultSet results = processSelectQuery(executeQuery(ruleEventQuery,rule));
 		return extractResultVariable(results.next(), ruleEventQueryVar);
 	}
 	
-	public static String runActionQuery(Model rule) {
+	public static String runActionQuery(Model rule) throws NoSuchElementException {
 		ResultSet results = processSelectQuery(executeQuery(actionQuery,rule));
 		return extractResultVariable(results.next(), actionQueryVar);
 	}
