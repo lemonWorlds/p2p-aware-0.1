@@ -1,5 +1,7 @@
 package interfaces;
 
-public interface InputStreamHandler extends Runnable {
+import java.io.InputStream;
 
+public interface InputStreamHandler extends Runnable {
+	void setInputStream(InputStream in);
 }

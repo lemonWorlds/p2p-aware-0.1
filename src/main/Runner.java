@@ -1,5 +1,7 @@
 package main;
 
+import java.io.IOException;
+
 import interfaces.DataStore;
 import interfaces.EventHandler;
 import interfaces.RuleBase;
@@ -22,6 +24,10 @@ public class Runner {
 		DataStore dataStore = new SimpleDataStoreImpl(schema);
 		EventHandler eventHandler = new SimpleEventHandlerImpl(ruleBase,dataStore,schema);
 		Server server = new SimpleServerImpl(eventHandler, new SimpleConcreteIOFactory(), port);
-		server.listen();
+		try {
+			server.listen();
+		} catch (IOException ex) {
+			System.out.println("Could not bind server socket. Cannot listen for peer communication.");
+		}
 	}
 }
