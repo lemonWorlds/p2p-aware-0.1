@@ -38,6 +38,11 @@ public class SimpleDataStoreImpl implements DataStore {
 	}
 	
 	@Override
+	public void addData(Model data) {
+		dataStore.add(data);
+	}
+	
+	@Override
 	public Model getDS() {
 		return dataStore;
 	}

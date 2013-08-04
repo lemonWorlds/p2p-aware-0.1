@@ -19,7 +19,6 @@ import main.SimpleEventHandlerImpl;
 import main.SimpleRuleBaseImpl;
 
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -94,7 +93,11 @@ public class SimpleEventHandlerImplTest {
 		Resource peer3 = peers.createResource("www.peers.com/peer3");
 		peer3.addProperty(RDF.type,peerClass);
 		Resource document1 = peers.createResource("http://www.mydoc.com/doc1");
+		Resource document2 = peers.createResource("http://www.mydoc.com/doc2");
+		document2.addProperty(RDF.type, schema.getResource("http://www.model.org/document"));
 		document1.addProperty(RDF.type, schema.getResource("http://www.model.org/document"));
+		Bag docBag2 = peers.createBag("www.aBag.org/bag2");
+		docBag2.add(peer3);
 		Bag docBag = peers.createBag("www.bag.net/bag1");
 		docBag.add(peer3);
 		docBag.add(peer1);

@@ -30,7 +30,7 @@ public class SimpleServerImpl implements Server {
 			try {
 				System.out.println("Waiting for a new peer connection...");
 				Socket socket = ss.accept();
-				System.out.println("New peer connection accepted!");
+				System.out.println("New peer connection accepted from " + socket.getInetAddress().toString());
 				BlockingQueue<String> sharedQueue = factory.createBlockingQueue();
 				OutputStreamHandler out = factory.createOutputStreamHandler(eventHandler, sharedQueue);
 				InputStreamHandler in = factory.createInputStreamHandler(sharedQueue);

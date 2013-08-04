@@ -9,5 +9,6 @@ public interface DataStore {
 	List<String> executeSelectQuery(Query query, String variable);
 	boolean executeAskQuery(Query query, String variable);
 	void updateDatabase(Query query, String variable);
+	void addData(Model data);
 	Model getDS();
 }
