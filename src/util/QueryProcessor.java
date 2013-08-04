@@ -17,15 +17,15 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 public class QueryProcessor {
 	public final static String FILE_NAME = "C:\\Users\\Mum\\git\\p2p-aware-0.1\\src\\config\\queries.properties";
-	private static final Query eventTypeQuery;
-	private static final Query ruleEventQuery;
-	private static final Query actionQuery;
-	private static final String eventSuperClassQueryPt1;
-	private static final String eventSuperClassQueryPt2;
-	private static final String eventTypeQueryVar;
-	private static final String ruleEventQueryVar;
-	private static final String actionQueryVar;
-	private static final String eventSuperClassQueryVar;
+	protected static final Query eventTypeQuery;
+	protected static final Query ruleEventQuery;
+	protected static final Query actionQuery;
+	protected static final String eventSuperClassQueryPt1;
+	protected static final String eventSuperClassQueryPt2;
+	protected static final String eventTypeQueryVar;
+	protected static final String ruleEventQueryVar;
+	protected static final String actionQueryVar;
+	protected static final String eventSuperClassQueryVar;
 
 	static {
 		Properties props = new Properties();
@@ -72,29 +72,32 @@ public class QueryProcessor {
 		return resultsList;
 	}
 	
-	private static Query createQueryFromString(String string) {
+	public static Query createQueryFromString(String string) {
 		return QueryFactory.create(string);
 	}
 	
-	private static QueryExecution executeQuery(Query query, Model model) {
+	public static QueryExecution executeQuery(Query query, Model model) {
 		return QueryExecutionFactory.create(query, model);
 	}
-/*	
-	private static Model processConstructQuery(QueryExecution execution) {
+
+	public static Model processConstructQuery(QueryExecution execution) {
 		return execution.execConstruct();
 	}
 	
-	private static boolean processAskQuery(QueryExecution execution) {
+	public static boolean processAskQuery(QueryExecution execution) {
 		return execution.execAsk();
 	}
-*/	
-	private static ResultSet processSelectQuery(QueryExecution execution) {
+
+	public static ResultSet processSelectQuery(QueryExecution execution) {
 		return execution.execSelect();
 	}
+
 	/*
 	 * Should we have the facility to check whether only single results are being produced where appropriate (as in old version)?
 	 */
-	private static String extractResultVariable(QuerySolution queryResult, String variable){
+	public static String extractResultVariable(QuerySolution queryResult, String variable){
 		return queryResult.getResource(variable).getURI();
 	}
+	
+	
 }

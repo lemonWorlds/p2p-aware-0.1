@@ -21,7 +21,7 @@ public class Runner {
 		 */
 		Model schema = SchemaFactory.createSchema(fileName);
 		RuleBase ruleBase = new SimpleRuleBaseImpl(schema);
-		DataStore dataStore = new SimpleDataStoreImpl(schema);
+		DataStore dataStore = new SimpleDataStoreImpl();
 		EventHandler eventHandler = new SimpleEventHandlerImpl(ruleBase,dataStore,schema);
 		Server server = new SimpleServerImpl(eventHandler, new SimpleConcreteIOFactory(), port);
 		try {

@@ -36,6 +36,8 @@ public class SimpleOutputStreamHandlerImpl implements OutputStreamHandler {
 				sendList(toSend);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
 		}
 	}
