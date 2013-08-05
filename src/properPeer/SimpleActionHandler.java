@@ -15,7 +15,7 @@ public class SimpleActionHandler implements ActionHandler {
 	private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	private final String CLASS_TAG = "class";
 	private final String METHOD_TAG = "method";
-	private final String PARAM_TAG = "param";
+	private final String PARAM_TAG = "peerIP";
 	
 	public SimpleActionHandler(BlockingQueue<String> sharedQueue) {
 		this.sharedQueue = sharedQueue;

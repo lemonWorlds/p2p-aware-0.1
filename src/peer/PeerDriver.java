@@ -14,7 +14,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import main.SchemaFactory;
 
 public class PeerDriver {
-	private Model schema = SchemaFactory.createSchema("C:\\Users\\Mum\\git\\protoNetwork\\src\\stuff\\schema.rdf");
+	private Model schema = SchemaFactory.createSchema("H:\\newWorkspace\\protoNetwork\\src\\stuff\\schema.rdf");
 	private Model updateEv;
 	private Model createEv;
 	private Model deleteEv;
@@ -30,7 +30,7 @@ public class PeerDriver {
 
 	private void launch() throws Exception {
 		initEvents();
-		Socket sock = new Socket("127.0.0.1",6000);
+		Socket sock = new Socket("127.0.0.1",3000);
 		ClientInputHandler inHandler = new ClientInputHandler(sock.getInputStream());
 		DataOutputStream dout = new DataOutputStream(sock.getOutputStream());
 		new Thread(inHandler).start();
