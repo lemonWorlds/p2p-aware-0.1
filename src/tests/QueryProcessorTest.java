@@ -29,7 +29,7 @@ public class QueryProcessorTest {
 	private static Model deleteEv;
 	private static Model documentEv;
 	private static Model evEv;
-	private static Model schemaMod = SchemaFactory.createSchema("C:\\Users\\Mum\\git\\protoNetwork\\src\\stuff\\schema.rdf");
+	private static Model schemaMod = SchemaFactory.createSchema("H:\\newWorkspace\\protoNetwork\\src\\stuff\\schema.rdf");
 	private static Model badEvent1;
 	private static Model badRule1;
 

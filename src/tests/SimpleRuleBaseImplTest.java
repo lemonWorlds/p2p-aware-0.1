@@ -43,7 +43,7 @@ public class SimpleRuleBaseImplTest {
 
 	@BeforeClass
 	public static void build() {
-		schema = SchemaFactory.createSchema("C:\\Users\\Mum\\git\\protoNetwork\\src\\stuff\\schema.rdf");
+		schema = SchemaFactory.createSchema("H:\\newWorkspace\\protoNetwork\\src\\stuff\\schema.rdf");
 		
 		rules = ModelFactory.createDefaultModel();
 		Resource ruleEvent1 = rules.createResource("http://www.rules.org/ruleEvent1");

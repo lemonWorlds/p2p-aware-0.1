@@ -34,7 +34,7 @@ public class SimpleEventHandlerImplTest {
 	private RuleBase base;
 	private DataStore store;
 	private EventHandler evHand;
-	private Model schema = SchemaFactory.createSchema("C:\\Users\\Mum\\git\\protoNetwork\\src\\stuff\\schema.rdf");
+	private Model schema = SchemaFactory.createSchema("H:\\newWorkspace\\protoNetwork\\src\\stuff\\schema.rdf");
 	private Model rules;
 	private Model rules1;
 	private Model rules2;
@@ -122,7 +122,7 @@ public class SimpleEventHandlerImplTest {
 
 	@Test
 	public final void testInsertPeers() throws Exception {
-		File testFile = new File("C:\\Users\\Mum\\git\\p2p-aware-0.1\\src\\tests\\test.xml");
+		File testFile = new File("H:\\newWorkspace\\p2p-aware-0.1\\src\\tests\\test.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(testFile);
@@ -141,7 +141,7 @@ public class SimpleEventHandlerImplTest {
 	
 	@Test
 	public void testGetRequired() throws Exception {
-		File testFile = new File("C:\\Users\\Mum\\git\\p2p-aware-0.1\\src\\tests\\test.xml");
+		File testFile = new File("H:\\newWorkspace\\p2p-aware-0.1\\src\\tests\\test.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(testFile);

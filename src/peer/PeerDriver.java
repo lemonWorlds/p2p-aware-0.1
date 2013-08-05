@@ -11,8 +11,6 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-import difflib.DiffUtils;
-
 import main.SchemaFactory;
 
 public class PeerDriver {

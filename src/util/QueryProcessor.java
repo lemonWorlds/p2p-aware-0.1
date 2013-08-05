@@ -16,7 +16,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class QueryProcessor {
-	public final static String FILE_NAME = "C:\\Users\\Mum\\git\\p2p-aware-0.1\\src\\config\\queries.properties";
+	public final static String FILE_NAME = "H:\\newWorkspace\\p2p-aware-0.1\\src\\config\\queries.properties";
 	protected static final Query eventTypeQuery;
 	protected static final Query ruleEventQuery;
 	protected static final Query actionQuery;
