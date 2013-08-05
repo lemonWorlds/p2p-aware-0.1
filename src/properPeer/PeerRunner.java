@@ -12,7 +12,7 @@ import properPeerInt.PeerOutHandler;
 public class PeerRunner {
 
 	public static void main(String[] args) throws Exception {
-		new PeerRunner().launch(args[0],Integer.parseInt(args[1]));
+		new PeerRunner().launch("127.0.0.1",3000);
 	}
 
 	private void launch(String ip, int port) throws Exception {

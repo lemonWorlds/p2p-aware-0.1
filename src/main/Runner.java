@@ -19,7 +19,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class Runner {
 	private Model schema;
 	public static void main(String[] args) {
-		new Runner().launch(Integer.parseInt(args[0]), args[1]);
+		new Runner().launch(3000, "H:\\newWorkspace\\protoNetwork\\src\\stuff\\schema.rdf");
 	}
 
 	private void launch(int port,String fileName) {
@@ -50,6 +50,8 @@ public class Runner {
 		peer2.addProperty(RDF.type,peerClass);
 		Resource peer3 = peers.createResource("www.peers.com/peer3");
 		peer3.addProperty(RDF.type,peerClass);
+		Resource peer4 = peers.createResource("www.peers.com/peer4");
+		peer4.addProperty(RDF.type,peerClass);
 		Resource document1 = peers.createResource("http://www.mydoc.com/doc1");
 		document1.addProperty(RDF.type, schema.getResource("http://www.model.org/document"));
 		Bag docBag = peers.createBag("www.bag.net/bag1");
@@ -58,12 +60,22 @@ public class Runner {
 		docBag.add(peer2);
 		document1.addProperty(schema.getProperty("http://www.model.org/heldBy"), docBag);
 		
-		/*
+
 		Resource document2 = peers.createResource("http://www.mydoc.com/doc2");
 		document2.addProperty(RDF.type, schema.getResource("http://www.model.org/document"));
 		Bag docBag2 = peers.createBag("www.aBag.org/bag2");
 		docBag2.add(peer3);
-		*/
+		document2.addProperty(schema.getProperty("http://www.model.org/heldBy"), docBag2);
+
+		
+		Resource document3 = peers.createResource("http://www.mydoc.com/doc3");
+		document3.addProperty(RDF.type, schema.getResource("http://www.model.org/document"));
+		Bag docBag3 = peers.createBag("www.aBag.org/bag3");
+		docBag3.add(peer2);
+		docBag3.add(peer1);
+		document3.addProperty(schema.getProperty("http://www.model.org/heldBy"), docBag3);
+
+
 		dataStore.addData(peers);
 	}
 
@@ -72,41 +84,43 @@ public class Runner {
 		Resource ruleEvent1 = rules.createResource("http://www.rules.org/ruleEvent1");
 		Resource eventClass = schema.getResource("http://www.model.org/event");
 		ruleEvent1.addProperty(RDF.type, eventClass);
-		String a1 = "<action><class>properPeer.DummyAction</class><method>doAction</method><peerData>document</peerData></action>";
+		String a1 = "<action><class>properPeer.DummyAction</class><method>doAction</method><peerData>none</peerData></action>";
 		String act1 = StringEscapeUtils.escapeXml(a1);
 		Resource action1 = rules.createResource(act1);
 		Property hasAction = schema.getProperty("http://www.model.org/hasAction");
 		ruleEvent1.addProperty(hasAction, action1);
 		
-		/*
+		
 		Model rules1 = ModelFactory.createDefaultModel();
 		Resource ruleEvent2 = rules1.createResource("http://www.rules.org/ruleEvent2");
-		Resource memberEventClass = schema.getResource("http://www.model.org/memberEvent");
-		ruleEvent2.addProperty(RDF.type, memberEventClass);
-		String a2 = "<action><stuff>hello</stuff><peerData>none</peerData></action>";
+		Resource create = schema.getResource("http://www.model.org/create");
+		ruleEvent2.addProperty(RDF.type, create);
+		String a2 = "<action><class>properPeer.AnotherDummy</class><method>dummyAct</method><peerData>document</peerData></action>";
 		String act2 = StringEscapeUtils.escapeXml(a2);
 		Resource action2 = rules1.createResource(act2);
 		ruleEvent2.addProperty(hasAction,action2);
 		
+		
 		Model rules2 = ModelFactory.createDefaultModel();
 		Resource ruleEvent3 = rules2.createResource("http://www.rules.org/ruleEvent3");
-		Resource updateClass = schema.getResource("http://www.model.org/update");
-		ruleEvent3.addProperty(RDF.type, updateClass);
-		String a3 = "<action><stuff>nooooo</stuff><peerData>document</peerData></action>";
+		Resource member = schema.getResource("http://www.model.org/memberEvent");
+		ruleEvent3.addProperty(RDF.type, member);
+		String a3 = "<action><class>properPeer.DummyAction</class><method>doAction</method><peerData>document</peerData></action>";
 		String act3 = StringEscapeUtils.escapeXml(a3);
 		Resource action3 = rules2.createResource(act3);
 		ruleEvent3.addProperty(hasAction,action3);
+		
 		
 		Model rules3 = ModelFactory.createDefaultModel();
 		Resource ruleEvent4 = rules3.createResource("http://www.rules.org/ruleEvent4");
 		Resource documentEventClass = schema.getResource("http://www.model.org/documentEvent");
 		ruleEvent4.addProperty(RDF.type, documentEventClass);
-		String a4 = "<action><stuff>tom</stuff><peerData>all</peerData></action>";
+		String a4 = "<action><class>properPeer.AnotherDummy</class><method>dummyAct</method><peerData>all</peerData></action>";
 		String act4 = StringEscapeUtils.escapeXml(a4);
 		Resource action4 = rules3.createResource(act4);
 		ruleEvent4.addProperty(hasAction,action4);
-		*/
 		
-		ruleBase.addRules(rules);
+		
+		ruleBase.addRules(rules,rules1,rules2,rules3);
 	}
 }

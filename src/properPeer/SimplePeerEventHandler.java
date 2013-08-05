@@ -72,19 +72,29 @@ public class SimplePeerEventHandler implements PeerEventHandler {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}/*
+		}
+		System.out.println("Enter the event type: ");
+		String eventType = null;
+		try {
+			eventType = bufferedReader.readLine();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		/*
 		try {
 			bufferedReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}*/
-		postEventModel(documentList.get(userInput));
+		postEventModel(documentList.get(userInput), eventType);
 	}
 
-	private void postEventModel(String documentURI) {
+	private void postEventModel(String documentURI, String eventType) {
 		Model event = ModelFactory.createDefaultModel();
 		Resource eventURI = event.createResource("http://www.peer.org/event1");
-		eventURI.addProperty(RDF.type, schema.getResource("http://www.model.org/update"));
+		eventURI.addProperty(RDF.type, schema.getResource("http://www.model.org/" + eventType ));
 		Resource me = event.createResource("http://www.me.org/me");
 		eventURI.addProperty(schema.getProperty("http://www.model.org/occurredAt"),me);
 		Resource doc = event.createResource(documentURI);
